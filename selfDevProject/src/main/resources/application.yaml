@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: selfDevProject
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.219.110:3306/springweb?characterEncoding=utf8
+    username: challengeuser
+    password: challenge
+
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
