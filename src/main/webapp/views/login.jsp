@@ -52,7 +52,7 @@
 			border-radius: 5px;
 			outline: none;
 			background: #fff;
-			box-sizing: border-box; /* ← 중요! */
+			box-sizing: border-box;
         }
         .login-btn {
             width: 100%;
