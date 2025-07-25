@@ -12,4 +12,15 @@
 		INSERT INTO user(uname, email, password)
 		VALUES(#{uname}, #{email}, #{password})
 	</insert>
+	
+	<update id="delUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
+		UPDATE user 
+		SET isUsable = 'N'
+		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'
+	</update>
+	
+	<!--delete id="delUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
+		DELETE FROM user
+		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'
+	</delete-->
 </mapper>

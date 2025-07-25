@@ -17,8 +17,12 @@ public class UserLogInOutController {
 	UserService uService;
 	
 	@GetMapping("/login")
-	public String userLogin() {
-		return "login";
+	public String userLogin(HttpSession session) {
+		if (session.getAttribute("UID") == null) {
+			return "login";
+		}
+		else return "redirect:/main";
+		
 	}
 	
 	@PostMapping("/loginProcess")
@@ -29,12 +33,11 @@ public class UserLogInOutController {
 			session.setAttribute("UID", uid);
 			request.setAttribute("message", "로그인에 성공했습니다.");
 			request.setAttribute("url", "/main");
-			return "alert";
 		} catch (Exception e) {
 			request.setAttribute("message", "아이디 또는 비밀번호가 잘못되었습니다.");
 			request.setAttribute("url", "/login");
-			return "alert";
 		}
+		return "alert";
 
 	}
 	
@@ -52,6 +55,20 @@ public class UserLogInOutController {
 			request.setAttribute("url", "/main");
 		}
 		return "alert";	
+	}
+	
+	
+	/*
+	 * 202507240309 session attribute 삭제 및 alert 띄워야함.
+	 */
+	@PostMapping("/deleteuser")
+	public String userDelete(HttpSession session, HttpServletRequest request, UserDTO user) {
+		try {
+			uService.delUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

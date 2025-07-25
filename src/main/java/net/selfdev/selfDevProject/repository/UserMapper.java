@@ -8,4 +8,5 @@ import net.selfdev.selfDevProject.dto.UserDTO;
 public interface UserMapper {
 	public int getUser(UserDTO user);
 	public int setUser(UserDTO user);
+	public int delUser(UserDTO user);
 }

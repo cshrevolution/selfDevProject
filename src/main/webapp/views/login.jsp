@@ -98,6 +98,12 @@
         <div class="signup-link">
             <a href="/signup">회원가입</a>
         </div>
+		
+		<form action="/deleteuser" method="post">
+			<input id="uname" name="uname">
+			<input id="password" name="password">
+			<input type="submit" value="삭제">
+		</form>
     </div>
 </body>
 </html>

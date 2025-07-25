@@ -19,4 +19,8 @@ public class UserService {
 	public int setUser(UserDTO user) {
 		return userMapper.setUser(user);
 	}
+	
+	public int delUser(UserDTO user) {
+		return userMapper.delUser(user);
+	}
 }
