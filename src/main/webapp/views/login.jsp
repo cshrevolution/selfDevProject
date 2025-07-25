@@ -84,7 +84,7 @@
     <div class="project-name">프로젝트 이름</div>
     <div class="container">
         <div class="login-title">로그인</div>
-        <form action="/login" method="post" autocomplete="off">
+        <form action="/loginProcess" method="post" autocomplete="off">
             <div class="form-group">
                 <label class="form-label" for="uname">아이디 (ID)</label>
                 <input class="form-input" type="text" id="uname" name="uname" required>

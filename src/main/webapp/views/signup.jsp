@@ -152,7 +152,7 @@
     <div class="project-name">프로젝트 이름</div>
     <div class="container">
         <div class="join-title">회원가입</div>
-        <form action="/sign_up" method="post" autocomplete="off" onsubmit="return checkForm(event);">
+        <form action="/signupProcess" method="post" autocomplete="off" onsubmit="return checkForm(event);">
             <div class="form-group">
                 <label class="form-label" for="uname">아이디 (ID)</label>
                 <input class="form-input" type="text" id="uname" name="uname" required>
@@ -173,10 +173,6 @@
                        oninput="checkPwMatch();">
                 <button type="button" class="toggle-pw" onclick="togglePw('password_confirm', this)">&#128065;</button>
                 <div id="pw-msg"></div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="nickname">닉네임 (선택)</label>
-                <input class="form-input" type="text" id="nickname" name="nickname">
             </div>
             <button class="join-btn" type="submit">회원가입</button>
         </form>

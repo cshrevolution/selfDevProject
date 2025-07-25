@@ -1,0 +1,11 @@
+package net.selfdev.selfDevProject.repository;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import net.selfdev.selfDevProject.dto.UserDTO;
+
+@Mapper
+public interface UserMapper {
+	public int getUser(UserDTO user);
+	public int setUser(UserDTO user);
+}

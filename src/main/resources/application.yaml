@@ -4,7 +4,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.219.110:3306/springweb?characterEncoding=utf8
+    url: jdbc:mysql://192.168.45.110:3306/challengedb?characterEncoding=utf8
     username: challengeuser
     password: challenge
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.selfdev.selfDevProject.repository.UserMapper">
+	<select id="getUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO" resultType="int">
+		SELECT uid
+		FROM user
+		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'
+	</select>
+	
+	<insert id="setUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
+		INSERT INTO user(uname, email, password)
+		VALUES(#{uname}, #{email}, #{password})
+	</insert>
+</mapper>
