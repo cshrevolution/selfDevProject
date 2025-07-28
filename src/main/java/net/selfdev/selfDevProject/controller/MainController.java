@@ -1,7 +1,8 @@
-package net.selfdev.selfDevProject;
+package net.selfdev.selfDevProject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +30,18 @@ public class MainController {
 		}
 		
 		return "main";
+	}
+	
+	
+	@GetMapping("/radio")
+	public String radio() {
+		return "radio";
+	}
+	
+	@PostMapping("/radioConfirm")
+	public String radioConfirm(HttpServletRequest request) {
+		System.out.println(request.getAttribute("radio"));
+		return null;
 	}
 	
 }

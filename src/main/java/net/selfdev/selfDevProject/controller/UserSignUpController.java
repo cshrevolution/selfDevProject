@@ -1,4 +1,4 @@
-package net.selfdev.selfDevProject;
+package net.selfdev.selfDevProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

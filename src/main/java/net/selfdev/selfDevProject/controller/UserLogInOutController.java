@@ -1,4 +1,4 @@
-package net.selfdev.selfDevProject;
+package net.selfdev.selfDevProject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,13 +58,17 @@ public class UserLogInOutController {
 	}
 	
 	
-	/*
-	 * 202507240309 session attribute 삭제 및 alert 띄워야함.
-	 */
 	@PostMapping("/deleteuser")
 	public String userDelete(HttpSession session, HttpServletRequest request, UserDTO user) {
 		try {
 			uService.delUser(user);
+			
+			if (session.getAttribute("UID") == null) {
+				session.removeAttribute("UID");
+			}
+			request.setAttribute("message", "사용자가 삭제되었습니다.");
+			request.setAttribute("url", "/login");
+			return "alert";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
