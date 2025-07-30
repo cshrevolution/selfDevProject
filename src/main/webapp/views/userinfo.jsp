@@ -187,7 +187,7 @@
   window.onclick = e => { if(e.target === editModal) editModal.style.display = 'none'; };
 
   document.getElementById('logoutBtn').onclick = () => {
-    location.href = ctx + '/login';
+    location.href = '/login';
   };
 
   document.getElementById('avatarInput').addEventListener('change', e => {
