@@ -3,7 +3,7 @@
 <html>
 <head>
 	
-	<title>Certification Page</title>
+	
 	<%@ include file="/views/common/header.jsp" %>
     <title>메인 화면</title>
     <style>

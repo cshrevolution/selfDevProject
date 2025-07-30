@@ -112,7 +112,7 @@
 
         <form id="loginForm" action="/loginProcess" method="post" autocomplete="off">
             <div class="form-group">
-                <label class="form-label" for="id">아이디 (ID)</label>
+                <label class="form-label" for="id">이름 (NAME)</label>
                 <input class="form-input" type="text" id="uname" name="uname" required>
             </div>
 

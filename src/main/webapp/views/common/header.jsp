@@ -28,11 +28,11 @@
 <script>
 	const ctx = '${pageContext.request.contextPath}';
   document.addEventListener('DOMContentLoaded', function() {
-    // localStorage에 저장된 lastBg 키 가져오기
+	// localStorage에 저장된 lastBg 키 가져오기
     var bg = localStorage.getItem('lastBg');
     if (bg) {
-      // 웹앱 컨텍스트 경로까지 포함해 이미지 URL 설정
-      var ctx = '<c:out value="${pageContext.request.contextPath}"/>';
+    	// 웹앱 컨텍스트 경로까지 포함해 이미지 URL 설정
+      
       document.body.style.backgroundImage =
         "url('" + ctx + "/images/" + bg + ".jpg')";
     }

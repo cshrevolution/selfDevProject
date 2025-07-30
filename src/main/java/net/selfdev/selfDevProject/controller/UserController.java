@@ -43,8 +43,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/logout")
-	public String userLogout(HttpSession session, HttpServletRequest request, UserDTO user) {
+	public String userLogout(HttpSession session, HttpServletRequest request) {
 		
+		/*
 		session.removeAttribute("UID");
 		
 		if (session.getAttribute("UID") == null) {
@@ -55,6 +56,13 @@ public class UserController {
 			request.setAttribute("message", "로그아웃 과정에서 오류가 발생했습니다.");
 			request.setAttribute("url", "/main");
 		}
+		*/
+		System.err.println("==============/logout Called!==============");
+		System.err.println("Current Session Attribute : " + session.getAttribute("UID"));
+		
+		session.invalidate();
+		request.setAttribute("message", "로그아웃 되었습니다.");
+		request.setAttribute("url", "/login");
 		return "alert";	
 	}
 	
@@ -89,7 +97,7 @@ public class UserController {
 		System.out.println(info.getEmail());
 		System.out.println(info.getNickname());
 		
-
+		request.setAttribute("uname", info.getUname());
 		request.setAttribute("nickname", info.getNickname() == null ? "닉네임이 없습니다." : info.getNickname());			
 		request.setAttribute("email", info.getEmail());
 		

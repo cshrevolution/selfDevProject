@@ -112,7 +112,7 @@
       <div class="badge"><img src="../images/badge3.png"><span>챌린지 달성</span></div>
     </div>
 
-    <button id="logoutBtn" onclick="location.href='/logout'">로그아웃</button>	
+    <button id="logoutBtn">로그아웃</button>	
   </div>
 
   <div id="editModal" class="modal">
@@ -130,12 +130,12 @@
 
       <div class="modal-group">
         <label for="nameInput">이름</label>
-        <input type="text" id="nameInput" value="홍길동" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+        <input type="text" id="nameInput" value="<%= request.getAttribute("uname") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
       </div>
 
       <div class="modal-group">
         <label for="emailInput">이메일</label>
-        <input type="email" id="emailInput" value="hong@gm.com" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+        <input type="email" id="emailInput" value="<%= request.getAttribute("email") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
       </div>
 
       <div class="modal-group">
@@ -187,7 +187,8 @@
   window.onclick = e => { if(e.target === editModal) editModal.style.display = 'none'; };
 
   document.getElementById('logoutBtn').onclick = () => {
-    location.href = '/login';
+    //location.href = '/login';			// 20250730 csh 이건 도대체 왜???
+    location.href = '/logout';
   };
 
   document.getElementById('avatarInput').addEventListener('change', e => {
@@ -234,7 +235,10 @@
     });
 
     editModal.style.display = 'none';
-    // TODO: 서버로 실제 저장 요청 (AJAX 혹은 form submit)
+    
+    // controller 전달 필요
+    
+
 
   };
   </script>
