@@ -27,4 +27,12 @@ public class UserService {
 	public UserDTO infoUser(int uid) {
 		return userMapper.infoUser(uid);
 	}
+	
+	public int updateUser(UserDTO user) {
+		return userMapper.updateUser(user);
+	}
+	
+	public int updateUserWithoutPW(UserDTO user) {
+		return userMapper.updateUserWithoutPW(user);
+	}
 }

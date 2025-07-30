@@ -20,7 +20,7 @@
 	</update>
 	
 	<select id="infoUser" parameterType="_int" resultType="net.selfdev.selfDevProject.dto.UserDTO">
-		SELECT uname, email, IFNULL(nickname, "")
+		SELECT uname, email, IFNULL(nickname, "") as nickname
 		FROM user
 		WHERE uid = #{uid} AND isUsable = 'Y'
 	</select>
@@ -29,4 +29,16 @@
 		DELETE FROM user
 		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'
 	</delete-->
+	
+	<update id="updateUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
+		UPDATE user
+		SET uname = #{uname}, email = #{email}, password = #{password}, nickname =  #{nickname}
+		WHERE uid = #{uid} AND isUsable = 'Y'
+	</update>
+	
+	<update id="updateUserWithoutPW" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
+		UPDATE user
+		SET uname = #{uname}, email = #{email}, nickname =  #{nickname}
+		WHERE uid = #{uid} AND isUsable = 'Y'
+	</update>
 </mapper>

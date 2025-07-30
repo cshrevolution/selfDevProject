@@ -103,7 +103,7 @@
     <button class="btn-edit" id="openEdit">정보 수정</button>
 
     <img id="currentAvatar" src="/images/avatar.png" class="avatar" alt="Avatar">
-    <h2 id="displayName"><%= request.getAttribute("nickname") %></h2>
+    <h2 id="displayNickName"><%= request.getAttribute("nickname") %></h2>
     <div class="info" id="displayEmail"><%= request.getAttribute("email") %></div>
 
     <div class="badges" id="displayBadges">
@@ -115,113 +115,219 @@
     <button id="logoutBtn">로그아웃</button>	
   </div>
 
+<!--
+	20250731 csh 
+	패스워드 변경, 닉네임, form 추가
+-->
   <div id="editModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeEdit">&times;</span>
       <h3>회원 정보 수정</h3>
-
-      <div class="modal-group">
-        <label for="avatarInput">프로필 사진</label>
-        <div class="preview-avatar">
-          <img id="avatarPreview" src="../images/avatar.png" alt="Avatar">
-          <input type="file" id="avatarInput" accept="image/*">
-        </div>
-      </div>
-
-      <div class="modal-group">
-        <label for="nameInput">이름</label>
-        <input type="text" id="nameInput" value="<%= request.getAttribute("uname") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
-      </div>
-
-      <div class="modal-group">
-        <label for="emailInput">이메일</label>
-        <input type="email" id="emailInput" value="<%= request.getAttribute("email") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
-      </div>
-
-      <div class="modal-group">
-        <label>뱃지 선택 (최대 3개)</label>
-        <div class="badge-selection" id="badgeSelection">
-          <label class="badge-option">
-            <input type="checkbox" name="badges" value="badge1" hidden>
-            <img src="../images/badge1.png"><span>첫 인증</span>
-          </label>
-          <label class="badge-option">
-            <input type="checkbox" name="badges" value="badge2" hidden>
-            <img src="../images/badge2.png"><span>7일 출석</span>
-          </label>
-          <label class="badge-option">
-            <input type="checkbox" name="badges" value="badge3" hidden>
-            <img src="../images/badge3.png"><span>챌린지 달성</span>
-          </label>
-          <label class="badge-option">
-            <input type="checkbox" name="badges" value="badge4" hidden>
-            <img src="../images/badge4.png"><span>30일 완주</span>
-          </label>
-          <label class="badge-option">
-            <input type="checkbox" name="badges" value="badge5" hidden>
-            <img src="../images/badge5.png"><span>친구 초대</span>
-          </label>
-        </div>
-      </div>
+	
+	  <form id="updateUserFrm" name="updateUserFrm">
+	  	<div class="modal-group">
+	        <label for="avatarInput">프로필 사진</label>
+	        <div class="preview-avatar">
+	          <!--img id="avatarPreview" src="../images/avatar.png" alt="Avatar">
+	          <input type="file" id="avatarInput" accept="image/*"-->
+			  <img id="currentAvatar" src="/images/avatar.png" class="avatar" alt="Avatar">
+	        </div>
+	      </div>
+	
+	      <div class="modal-group">
+	        <label for="nameInput">이름</label>
+	        <input type="text" id="uname" name="uname" value="<%= request.getAttribute("uname") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+	      </div>
+	
+	      <div class="modal-group">
+	        <label for="emailInput">이메일</label>
+	        <input type="email" id="email" name="email" value="<%= request.getAttribute("email") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+	      </div>
+	      
+	      <div class="modal-group">
+	        <label for="nickNameInput">닉네임</label>
+	        <input type="text" id="nickname" name="nickname" value="<%= request.getAttribute("nickname") %>" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+	      </div>
+	
+	      <div class="modal-group">
+	        <label for="passwdInput">비밀번호</label>
+	        <input type="password" id="password" name="password" value="" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+	      </div>
+	      
+	      <div class="modal-group">
+	        <label for="passwdInputConfirm">비밀번호 확인</label>
+	        <input type="password" id="passwordConfirm" value="" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:6px;">
+	      </div>
+	
+	      <div class="modal-group">
+	        <label>뱃지 선택 (최대 3개)</label>
+	        <div class="badge-selection" id="badgeSelection">
+	          <label class="badge-option">
+	            <input type="checkbox" name="badges" value="badge1" hidden>
+	            <img src="../images/badge1.png"><span>첫 인증</span>
+	          </label>
+	          <label class="badge-option">
+	            <input type="checkbox" name="badges" value="badge2" hidden>
+	            <img src="../images/badge2.png"><span>7일 출석</span>
+	          </label>
+	          <label class="badge-option">
+	            <input type="checkbox" name="badges" value="badge3" hidden>
+	            <img src="../images/badge3.png"><span>챌린지 달성</span>
+	          </label>
+	          <label class="badge-option">
+	            <input type="checkbox" name="badges" value="badge4" hidden>
+	            <img src="../images/badge4.png"><span>30일 완주</span>
+	          </label>
+	          <label class="badge-option">
+	            <input type="checkbox" name="badges" value="badge5" hidden>
+	            <img src="../images/badge5.png"><span>친구 초대</span>
+	          </label>
+	        </div>
+	      </div>
+	  </form>
+      
 
       <div class="actions">
-        <button type="button" class="btn-cancel" id="cancelEdit">취소</button>
-        <button type="button" class="btn-save" id="saveEdit">저장</button>
+        <button type="button" class="btn-cancel" id="cancelBtn">취소</button>
+        <button type="button" class="btn-save" id="saveBtn">저장</button>
       </div>
     </div>
   </div>
 
   <script src='/script/jquery-3.7.1.js'></script>
   <script>
-  //const ctx = '${pageContext.request.contextPath}';		//20250730 csh 이것때문에 정보수정 안 뜸.
-  const editModal = document.getElementById('editModal');
-  const openEdit  = document.getElementById('openEdit');
-  const closeEdit = document.getElementById('closeEdit');
-  const cancelBtn = document.getElementById('cancelEdit');
-  const saveBtn   = document.getElementById('saveEdit');
+  /*
+   * 20250731 csh
+   * DOM -> jquery 변경
+   */
+   
+	$(function() {
+		let editModal = $('#editModal');
+		let openEdit = $('#openEdit');
+		let closeEdit = $('#closeEdit');
+		let cancelBtn = $('#cancelBtn');
+		let saveBtn = $('#saveBtn');
+		let logoutBtn = $('#logoutBtn');
+		
+		openEdit.click(function() { editModal.css("display", "flex"); });
+		closeEdit.click(function() { editModal.css("display", "none"); });
+		
+		$(window).click(function(e) {
+			if (e.target === editModal) {
+				editModal.css("display", "none");
+			}
+		});
+		
+		logoutBtn.click(function() {
+			location.href = "/logout";
+		});
+		
+		cancelBtn.click(function() { editModal.css("display", "none"); })
+		
+		saveBtn.click(function() {
+			let uname = $('#uname');
+			let email = $('#email');
+			let nickname = $('#nickname');
+			let password = $('#password');
+			let passwordConfirm = $('#passwordConfirm');
+		   
+			if (password.val() != passwordConfirm.val()) {
+				alert('패스워드가 일치하지 않습니다!');
+				passwordConfirm.focus();
+				return;
+			}
+			else if (nickname.val() == "닉네임이 없습니다.") {
+				alert('다른 닉네임으로 설정해주세요.');
+				nickname.focus();
+				return;
+			}
+			else if (uname.val() == '' || email.val() == '' || nickname.val() == '') {
+				alert('양식을 모두 채워주세요.');
+				return;
+			}
 
-
-  openEdit.onclick  = () => editModal.style.display = 'flex';
+			$('#displayNickName').val(nickname);
+			$('#displayEmail').val(email);
+		   
+	
+			editModal.css("display", "none");
+		   
+			let updateUserFrm = $('#updateUserFrm');
+			updateUserFrm.attr("action", "/updateUser");
+			updateUserFrm.attr("method", "POST");
+			updateUserFrm.submit();
+		});
+		
+	})
   
-  closeEdit.onclick = cancelBtn.onclick = () => editModal.style.display = 'none';
-  window.onclick = e => { if(e.target === editModal) editModal.style.display = 'none'; };
+  
+	
+   
+   
+   
+   
+   
+   
+/*
+ //const ctx = '${pageContext.request.contextPath}';		//20250730 csh 이것때문에 정보수정 안 뜸.
+ const editModal = document.getElementById('editModal');
+ const openEdit  = document.getElementById('openEdit');
+ const closeEdit = document.getElementById('closeEdit');
+ const cancelBtn = document.getElementById('cancelEdit');
+ let saveBtn = $('#saveBtn');
 
-  document.getElementById('logoutBtn').onclick = () => {
-    //location.href = '/login';			// 20250730 csh 이건 도대체 왜???
-    location.href = '/logout';
-  };
 
-  document.getElementById('avatarInput').addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    document.getElementById('avatarPreview').src = URL.createObjectURL(file);
-  });
+ openEdit.onclick  = () => editModal.style.display = 'flex';
+ 
+ closeEdit.onclick = cancelBtn.onclick = () => editModal.style.display = 'none';
+ window.onclick = e => { if(e.target === editModal) editModal.style.display = 'none'; };
 
-  document.querySelectorAll('.badge-option').forEach(label => {
-    label.addEventListener('click', () => {
-      const cb = label.querySelector('input[type="checkbox"]');
-      if (!cb.checked && document.querySelectorAll('input[name="badges"]:checked').length >= 3) return;
-      cb.checked = !cb.checked;
-      label.classList.toggle('selected', cb.checked);
-    });
-  });
+ document.getElementById('logoutBtn').onclick = () => {
+   //location.href = '/login';			// 20250730 csh 이건 도대체 왜???
+   location.href = '/logout';
+ };
+
+
+ document.getElementById('avatarInput').addEventListener('change', e => {
+   const file = e.target.files[0];
+   if (!file) return;
+   document.getElementById('avatarPreview').src = URL.createObjectURL(file);
+ });
+
+
+ document.querySelectorAll('.badge-option').forEach(label => {
+   label.addEventListener('click', () => {
+     const cb = label.querySelector('input[type="checkbox"]');
+     if (!cb.checked && document.querySelectorAll('input[name="badges"]:checked').length >= 3) return;
+     cb.checked = !cb.checked;
+     label.classList.toggle('selected', cb.checked);
+   });
+ });
+
+
+20250731 csh
+DB에 프로필 사진이 없는데 이렇게 하면 어떻게 처리를 하나요?
+
 
   saveBtn.onclick = function() {
     // 업데이트된 값 가져오기
-    const newName  = document.getElementById('nameInput').value;
-    const newEmail = document.getElementById('emailInput').value;
-    const fileInput = document.getElementById('avatarInput');
-    const fileName  = fileInput.files[0] ? fileInput.files[0].name : '변경없음';
+    const uname  = document.getElementById('uname').value;
+    const email = document.getElementById('email').value;
+    const nickname = document.getElementById('nickname').value;
+	const password = document.getElementById('password').value;
+	const passwordConfirm = document.getElementById('passwordConfirm').value;
+    //const fileInput = document.getElementById('avatarInput');
+    //const fileName  = fileInput.files[0] ? fileInput.files[0].name : '변경없음';
     const selectedBadges = Array.from(
       document.querySelectorAll('input[name="badges"]:checked')
     ).map(cb => cb.value);
 
     // 화면에 반영
-    document.getElementById('displayName').textContent  = newName;
-    document.getElementById('displayEmail').textContent = '이메일: ' + newEmail;
-    if (fileInput.files[0]) {
-      document.getElementById('currentAvatar').src = document.getElementById('avatarPreview').src;
-    }
+    document.getElementById('displayNickName').textContent  = nickname;
+    document.getElementById('displayEmail').textContent = '이메일: ' + email;
+    //if (fileInput.files[0]) {
+    //  document.getElementById('currentAvatar').src = document.getElementById('avatarPreview').src;
+    //}
     const displayBadges = document.getElementById('displayBadges');
     displayBadges.innerHTML = '';
     selectedBadges.forEach(key => {
@@ -234,13 +340,15 @@
       displayBadges.appendChild(div);
     });
 
+	
+
     editModal.style.display = 'none';
     
     // controller 전달 필요
     
-
-
+    
   };
+  */
   </script>
 </body>
 </html>

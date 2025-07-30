@@ -10,4 +10,6 @@ public interface UserMapper {
 	public int setUser(UserDTO user);
 	public int delUser(UserDTO user);
 	public UserDTO infoUser(int uid);
+	public int updateUser(UserDTO user);
+	public int updateUserWithoutPW(UserDTO user);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -58,7 +59,7 @@ public class UserController {
 		}
 		*/
 		System.err.println("==============/logout Called!==============");
-		System.err.println("Current Session Attribute : " + session.getAttribute("UID"));
+		System.out.println("Current Session Attribute : " + session.getAttribute("UID"));
 		
 		session.invalidate();
 		request.setAttribute("message", "로그아웃 되었습니다.");
@@ -88,11 +89,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/userInfo")
-	public String userInfo(@ModelAttribute UserDTO user, HttpServletRequest request, HttpSession session) {
+	public String userInfo(HttpServletRequest request, HttpSession session) {
 		
 		int uid = (int)session.getAttribute("UID");
 		UserDTO info = uService.infoUser(uid);
 		
+		System.err.println("==============/userInfo Called!==============");
 		System.out.println(info.getUname());
 		System.out.println(info.getEmail());
 		System.out.println(info.getNickname());
@@ -104,8 +106,24 @@ public class UserController {
 		return "userinfo";
 	}
 	
+	@PostMapping("/updateUser")
+	@ResponseBody
+	public String updateUser(HttpSession session, HttpServletRequest request, @ModelAttribute UserDTO user) {
+		try {
+			user.setUid((int)session.getAttribute("UID"));
+			if (user.getPassword().isEmpty() || user.getPassword() == null) {
+				uService.updateUserWithoutPW(user);
+			}
+			else uService.updateUser(user);
+		} catch (Exception e) {
+			return "redirect:/error";
+		}
+
+		return null;
+	}
+	
 	@PostMapping("/deleteuser")
-	public String userDelete(HttpSession session, HttpServletRequest request, UserDTO user) {
+	public String userDelete(HttpSession session, HttpServletRequest request, @ModelAttribute UserDTO user) {
 		try {
 			uService.delUser(user);
 			

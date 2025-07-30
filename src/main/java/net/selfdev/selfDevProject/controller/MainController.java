@@ -37,7 +37,7 @@ public class MainController {
 		
 		if (uid != null) {
 			System.err.println("==============/main Called!==============");
-			System.err.println("Current User's UID : " + uid.toString());
+			System.out.println("Current User's UID : " + uid.toString());
 		}
 		else {
 			request.setAttribute("message", "사용자 정보가 없습니다. 로그인 화면으로 이동합니다.");
