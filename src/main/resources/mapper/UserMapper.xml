@@ -19,6 +19,12 @@
 		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'
 	</update>
 	
+	<select id="infoUser" parameterType="_int" resultType="net.selfdev.selfDevProject.dto.UserDTO">
+		SELECT uname, email, IFNULL(nickname, "")
+		FROM user
+		WHERE uid = #{uid} AND isUsable = 'Y'
+	</select>
+	
 	<!--delete id="delUser" parameterType="net.selfdev.selfDevProject.dto.UserDTO">
 		DELETE FROM user
 		WHERE uname = #{uname} AND password = #{password} AND isUsable = 'Y'

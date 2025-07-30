@@ -23,4 +23,8 @@ public class UserService {
 	public int delUser(UserDTO user) {
 		return userMapper.delUser(user);
 	}
+	
+	public UserDTO infoUser(int uid) {
+		return userMapper.infoUser(uid);
+	}
 }

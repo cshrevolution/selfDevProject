@@ -10,10 +10,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
+	/*
 	@GetMapping("/error")
 	public String error() {
 		return "error";
 	}
+	*/
 	
 	@GetMapping("/main")
 	public String main(HttpSession session, HttpServletRequest request) {

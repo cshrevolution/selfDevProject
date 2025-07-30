@@ -9,4 +9,5 @@ public interface UserMapper {
 	public int getUser(UserDTO user);
 	public int setUser(UserDTO user);
 	public int delUser(UserDTO user);
+	public UserDTO infoUser(int uid);
 }
