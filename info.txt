@@ -11,3 +11,12 @@
 통계
 신고
 게임화
+
+
+
+
+동일
+@RestController
+
+@Controller
+@ResponseBody

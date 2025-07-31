@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GoalController {
 
-	@GetMapping("/goals")
+	@GetMapping("/goal")
 	public String goal() {
 		return "goal";
 	}
