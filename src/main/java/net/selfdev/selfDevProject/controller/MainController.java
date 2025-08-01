@@ -23,10 +23,16 @@ public class MainController {
 	@GetMapping("/error")
 	public String error(Exception e, Model model) {
 		
+		e.printStackTrace();
+		return null;
+		
+		/*
 		String errorString = e.toString();
 		model.addAttribute("errorString", errorString);
 		
+		
 		return "error";	
+		*/
 	}
 	
 	

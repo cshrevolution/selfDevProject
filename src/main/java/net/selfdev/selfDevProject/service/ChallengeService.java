@@ -11,8 +11,12 @@ public class ChallengeService {
 	
 	@Autowired
 	private ChallengeMapper cMapper;
+	
+	public ChallengeDTO getChallenge(int uid) {
+		return cMapper.getChallenge(uid);
+	}
 
-	public ChallengeDTO setChallenge(ChallengeDTO challenge) {
+	public int setChallenge(ChallengeDTO challenge) {
 		return cMapper.setChallenge(challenge);
 	}
 }

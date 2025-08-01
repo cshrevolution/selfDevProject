@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -70,7 +71,7 @@
   <!-- 등록/수정 모달 -->
   <div id="challengeModal" class="modal">
     <div class="modal-content">
-      <form action="/challengeRegister" method="POST">
+      <form action="/challengeRegister" method="POST" id="challengeFrm" name="challengeFrm">
 	      <span class="close" id="closeModal" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:1.4em;">&times;</span>
 	      <h3 id="modalTitle">챌린지 등록</h3>
 	      <div class="modal-group">
@@ -84,9 +85,10 @@
 		  <div class="modal-group">
 		    <label for="challengeDue">기한</label>
 		    <div class="date-picker-wrapper">
-		      <!-- readonly로 두면 직접 입력 차단, 아이콘 클릭/클릭 시 열림 -->
-		      <input type="text" id="challengeDue" placeholder="YYYY-MM-DD" name="endAt" readonly>
+
+		      <input type="datetime" id="challengeDue" placeholder="YYYY-MM-DD" name="endAt" readonly>
 		      <span class="calendar-icon">&#128197;</span>
+
 		    </div>
 		  </div>
 	      <div class="modal-actions">
@@ -97,11 +99,16 @@
     </div>
   </div>
 
+  <
   <script>
     // 배경 복원 (생략: 앞서 적용한 코드)
 
     // 챌린지 데이터 구조: {title, desc, dueDate (YYYY-MM-DD), reminded3, reminded1}
-    var challenges = [], editingIndex = -1;
+
+  	var singleChallengeStr = '${challengeJSON}';
+  	var challengeTmp = JSON.parse(singleChallengeStr);
+  	var challenges = [challengeTmp];
+  
 
     function render() {
       var ul = document.getElementById('challengeList');
@@ -111,9 +118,9 @@
         li.className = 'challenge-item';
         li.innerHTML =
           '<div class="info">' +
-            '<h3>' + ch.title + '</h3>' +
-            '<p>' + ch.desc + '</p>' +
-            '<p class="due">기한: ' + ch.dueDate + '</p>' +
+            '<h3>' + ch.cname + '</h3>' +
+            '<p>' + ch.description + '</p>' +
+            '<p class="due">기한: ' + new Date(ch.endAt) + '</p>' +
           '</div>' +
           '<div class="actions">' +
             '<button class="btn-edit" data-i="'+i+'">수정</button>' +
@@ -139,9 +146,9 @@
       modalTitle.textContent = isEdit ? '챌린지 수정' : '챌린지 등록';
       if (isEdit) {
         var ch = challenges[idx];
-        fldTitle.value = ch.title;
-        fldDesc.value  = ch.desc;
-        fldDue.value   = ch.dueDate;
+        fldTitle.value = ch.cname;
+        fldDesc.value  = ch.description;
+        fldDue.value   = new Date(ch.endAt);
       } else {
         fldTitle.value = '';
         fldDesc.value  = '';
@@ -164,8 +171,14 @@
       if (editingIndex>=0) challenges[editingIndex] = item;
       else                 challenges.push(item);
       modal.style.display='none';
+      
+      /* 20250801 csh Deprecated. DB에 넣는 로직도 없이 그냥 프론트에서 보여주는 코드임.
       render();
       checkReminders();  // 저장 직후에도 알림 체크
+      */
+      
+      let challengeFrm = document.getElementById('challengeFrm');
+      challengeFrm.submit();
     };
 
     document.getElementById('challengeList').addEventListener('click', function(e){
@@ -201,6 +214,7 @@
     checkReminders();
     setInterval(checkReminders, 60*1000);  // 1분마다 체크
 
+
 	document.addEventListener('DOMContentLoaded', function(){
 	  var fp = flatpickr("#challengeDue", {
 	    dateFormat: "Y-m-d"
@@ -210,7 +224,7 @@
 	    fp.open();
 	  });
 	});
-	
+
   </script>
 </body>
 </html>

@@ -6,5 +6,6 @@ import net.selfdev.selfDevProject.dto.ChallengeDTO;
 
 @Mapper
 public interface ChallengeMapper {
-	public ChallengeDTO setChallenge(ChallengeDTO challenge);
+	public ChallengeDTO getChallenge(int uid);
+	public int setChallenge(ChallengeDTO challenge);
 }
