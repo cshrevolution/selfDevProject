@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -95,7 +94,6 @@ public class UserController {
 	}
 	
 	@PostMapping("/updateUser")
-	@ResponseBody
 	public String updateUser(HttpSession session, HttpServletRequest request, @ModelAttribute UserDTO user) {
 		try {
 			user.setUid((int)session.getAttribute("UID"));
@@ -104,10 +102,12 @@ public class UserController {
 			}
 			else uService.updateUser(user);
 		} catch (Exception e) {
-			return "redirect:/error";
+			e.printStackTrace();
 		}
+		request.setAttribute("message", "사용자 정보가 수정되었습니다.");
+		request.setAttribute("url", "/userInfo");
 
-		return null;
+		return "alert";
 	}
 	
 	@PostMapping("/deleteuser")

@@ -15,7 +15,7 @@ public class ChallengeDTO {
 	private int cid;
 	private String cname;
 	private String description;
-	private int createrId;
+	private int creatorId;
 	private Date startAt;
 	private Date endAt;
 	private Date createAt;

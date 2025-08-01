@@ -107,9 +107,9 @@
 
   	var singleChallengeStr = '${challengeJSON}';
   	var challengeTmp = JSON.parse(singleChallengeStr);
-  	var challenges = [challengeTmp];
-  
+  	var challenges = Array.isArray(challengeTmp) ? challengeTmp : [challengeTmp];
 
+  
     function render() {
       var ul = document.getElementById('challengeList');
       ul.innerHTML = '';
@@ -118,13 +118,13 @@
         li.className = 'challenge-item';
         li.innerHTML =
           '<div class="info">' +
-            '<h3>' + ch.cname + '</h3>' +
+            '<h3 id="cname" name="cname">' + ch.cname + '</h3>' +
             '<p>' + ch.description + '</p>' +
-            '<p class="due">기한: ' + new Date(ch.endAt) + '</p>' +
+            '<p class="due">기한: ' + ch.endAt.substring(0, 10) + '</p>' +
           '</div>' +
           '<div class="actions">' +
             '<button class="btn-edit" data-i="'+i+'">수정</button>' +
-            '<button class="btn-delete" data-i="'+i+'">삭제</button>' +
+            '<button class="btn-delete" data-i="'+i+'" data-cname="'+ch.cname+'">삭제</button>' +
           '</div>';
         ul.appendChild(li);
       });
@@ -145,10 +145,11 @@
       editingIndex = isEdit ? idx : -1;
       modalTitle.textContent = isEdit ? '챌린지 수정' : '챌린지 등록';
       if (isEdit) {
+    	fldTitle.readOnly = true;
         var ch = challenges[idx];
         fldTitle.value = ch.cname;
         fldDesc.value  = ch.description;
-        fldDue.value   = new Date(ch.endAt);
+        fldDue.value   = ch.endAt.substring(0, 10);
       } else {
         fldTitle.value = '';
         fldDesc.value  = '';
@@ -186,8 +187,20 @@
       if (e.target.classList.contains('btn-edit'))  showModal(true, i);
       if (e.target.classList.contains('btn-delete')){
         if (confirm('삭제하시겠습니까?')) {
-          challenges.splice(i,1);
-          render();
+        	var cname = document.getElementById("cname").textContent
+        	fetch('/deleteChallenge', {
+       	      method: 'POST',
+       	      headers: {
+       	        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+       	      },
+       	      body: `cname=${cname}`
+       	    })
+       	    .then(res => res.text())
+       	    .then(html => {
+       	      document.open();
+       	      document.write(html);
+       	      document.close();
+       	    });
         }
       }
     });

@@ -11,4 +11,15 @@
 		INSERT INTO challenge(cname, description, creatorId, startAt, endAt)
 		VALUES(#{cname}, #{description}, #{createrId}, sysdate(), #{endAt})
 	</insert>
+	
+	<update id="updateChallenge" parameterType="net.selfdev.selfDevProject.dto.ChallengeDTO">
+		UPDATE challenge
+		SET cname = #{cname}, description = #{description}, endAt = #{endAt}, modifyAt = sysdate()
+		WHERE cname = #{cname}
+	</update>
+	
+	<delete id="deleteChallenge" parameterType="net.selfdev.selfDevProject.dto.ChallengeDTO">
+		DELETE FROM challenge
+		WHERE cname = #{cname} AND creatorId = #{creatorId}
+	</delete>
 </mapper>
