@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.selfdev.selfDevProject.repository.ChallengeMapper">
+	<select id="getChallenge" parameterType="net.selfdev.selfDevProject.dto.ChallengeDTO" resultType="net.selfdev.selfDevProject.dto.ChallengeDTO">
+		SELECT cname, description, createrId, startAt, endAt
+		FROM challenge
+		WHERE createrId = #{uid}
+	</select>
 	
+	<insert id="setChallenge" parameterType="net.selfdev.selfDevProject.dto.ChallengeDTO">
+		INSERT INTO challenge(cname, description, createrId, startAt, endAt)
+		VALUES(#{cname}, #{description}, #{createrId}, sysdate(), #{endAt})
+	</insert>
 </mapper>

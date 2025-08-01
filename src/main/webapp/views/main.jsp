@@ -170,7 +170,7 @@
 	    소셜 기능
 	  </div>
 	  <div class="box right"
-	       onclick="location.href='${pageContext.request.contextPath}/goal'">
+	       onclick="location.href='${pageContext.request.contextPath}/challenge'">
 	    목표 설정 기능
 	  </div>
 	</div>

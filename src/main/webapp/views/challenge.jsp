@@ -70,28 +70,30 @@
   <!-- 등록/수정 모달 -->
   <div id="challengeModal" class="modal">
     <div class="modal-content">
-      <span class="close" id="closeModal" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:1.4em;">&times;</span>
-      <h3 id="modalTitle">챌린지 등록</h3>
-      <div class="modal-group">
-        <label for="challengeTitle">제목</label>
-        <input type="text" id="challengeTitle">
-      </div>
-      <div class="modal-group">
-        <label for="challengeDesc">설명</label>
-        <textarea id="challengeDesc"></textarea>
-      </div>
-	  <div class="modal-group">
-	    <label for="challengeDue">기한</label>
-	    <div class="date-picker-wrapper">
-	      <!-- readonly로 두면 직접 입력 차단, 아이콘 클릭/클릭 시 열림 -->
-	      <input type="text" id="challengeDue" placeholder="YYYY-MM-DD" readonly>
-	      <span class="calendar-icon">&#128197;</span>
-	    </div>
-	  </div>
-      <div class="modal-actions">
-        <button type="button" class="btn-cancel" id="btnCancel">취소</button>
-        <button type="button" class="btn-save" id="btnSave">저장</button>
-      </div>
+      <form action="/challengeRegister" method="POST">
+	      <span class="close" id="closeModal" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:1.4em;">&times;</span>
+	      <h3 id="modalTitle">챌린지 등록</h3>
+	      <div class="modal-group">
+	        <label for="challengeTitle">제목</label>
+	        <input type="text" id="challengeTitle" name="cname">
+	      </div>
+	      <div class="modal-group">
+	        <label for="challengeDesc">설명</label>
+	        <textarea id="challengeDesc" name="description"></textarea>
+	      </div>
+		  <div class="modal-group">
+		    <label for="challengeDue">기한</label>
+		    <div class="date-picker-wrapper">
+		      <!-- readonly로 두면 직접 입력 차단, 아이콘 클릭/클릭 시 열림 -->
+		      <input type="text" id="challengeDue" placeholder="YYYY-MM-DD" name="endAt" readonly>
+		      <span class="calendar-icon">&#128197;</span>
+		    </div>
+		  </div>
+	      <div class="modal-actions">
+	        <button type="button" class="btn-cancel" id="btnCancel">취소</button>
+	        <button type="button" class="btn-save" id="btnSave">저장</button>
+	      </div>
+	    </form>
     </div>
   </div>
 

@@ -45,19 +45,7 @@ public class UserController {
 	
 	@GetMapping("/logout")
 	public String userLogout(HttpSession session, HttpServletRequest request) {
-		
-		/*
-		session.removeAttribute("UID");
-		
-		if (session.getAttribute("UID") == null) {
-			request.setAttribute("message", "로그아웃 되었습니다.");
-			request.setAttribute("url", "/login");
-		}
-		else {
-			request.setAttribute("message", "로그아웃 과정에서 오류가 발생했습니다.");
-			request.setAttribute("url", "/main");
-		}
-		*/
+
 		System.err.println("==============/logout Called!==============");
 		System.out.println("Current Session Attribute : " + session.getAttribute("UID"));
 		
